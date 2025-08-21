@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './components/frontend/Home';
+import About from './components/frontend/About';
+import Contactus from './components/frontend/Contactus';
+import './assets/css/style.scss';
+import Services from './components/frontend/Services';
+import Projects from './components/frontend/Projects';
+import Blogs from './components/frontend/Blogs';
+import Login from './components/backend/Login';
+import { ToastContainer} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import Dashboard from './components/backend/Dashboard';
+import RequireAuth from './components/commonlayout/RequireAuth';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<Home/>}/>
+      <Route path='/about' element={<About/>}/>
+      <Route path='/services' element={<Services/>}/>
+      <Route path='/projects' element={<Projects/>}/>
+      <Route path='/blogs' element={<Blogs/>}/>
+      <Route path='/contact-us' element={<Contactus/>}/>
+      <Route path='/admin/login' element={<Login/>}/>
+      <Route path='/admin/dashboard' element={
+        <RequireAuth>
+          <Dashboard/>
+        </RequireAuth>
+        
+        }/>
+      {/* Add other routes as needed */}
+    </Routes>
+    </BrowserRouter>
+    <ToastContainer />
+    </>
   );
 }
 
